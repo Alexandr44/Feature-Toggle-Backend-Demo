@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: Feature-Toggle-Backend-Demo
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres!
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: feature_toggle
+  liquibase:
+    user: postgres
+    password: postgres!
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master-local.xml
+    default-schema: feature_toggle
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration-ms: 3600000
