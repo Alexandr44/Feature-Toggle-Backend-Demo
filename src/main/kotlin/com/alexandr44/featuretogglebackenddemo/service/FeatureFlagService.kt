@@ -2,6 +2,7 @@ package com.alexandr44.featuretogglebackenddemo.service
 
 import com.alexandr44.featuretogglebackenddemo.dto.FeatureFlagDto
 import com.alexandr44.featuretogglebackenddemo.dto.FeatureFlagInputDto
+import com.alexandr44.featuretogglebackenddemo.exception.FeatureFlagNotFoundException
 import com.alexandr44.featuretogglebackenddemo.mapper.FeatureFlagMapper
 import com.alexandr44.featuretogglebackenddemo.repository.FeatureFlagRepository
 import org.springframework.stereotype.Service
@@ -25,7 +26,7 @@ class FeatureFlagService(
     fun getByKey(key: String): FeatureFlagDto {
         return featureFlagMapper.map(
             featureFlagRepository.findByKeyAndActiveIsTrue(key)
-                .orElseThrow { IllegalArgumentException("FeatureFlag not found or is not active with key $key") }
+                .orElseThrow { FeatureFlagNotFoundException("Feature flag with key $key is not found or is not active") }
         )
     }
 
@@ -42,7 +43,7 @@ class FeatureFlagService(
     @Transactional
     fun editFeatureFlag(key: String, featureFlagInputDto: FeatureFlagInputDto): FeatureFlagDto {
         val featureFlag = featureFlagRepository.findByKeyAndActiveIsTrue(key)
-            .orElseThrow { IllegalArgumentException("FeatureFlag not found with key $key") }
+            .orElseThrow { FeatureFlagNotFoundException("Feature flag with key $key is not found or is not active") }
         featureFlagMapper.update(featureFlag, featureFlagInputDto)
         return featureFlagMapper.map(featureFlag)
     }
@@ -50,7 +51,7 @@ class FeatureFlagService(
     @Transactional
     fun deleteFeatureFlag(key: String): FeatureFlagDto {
         val featureFlag = featureFlagRepository.findByKeyAndActiveIsTrue(key)
-            .orElseThrow { IllegalArgumentException("FeatureFlag not found with id $key") }
+            .orElseThrow { FeatureFlagNotFoundException("Feature flag with key $key is not found or is not active") }
             .apply {
                 active = false
             }
@@ -60,7 +61,7 @@ class FeatureFlagService(
     @Transactional
     fun toggleFeatureFlag(key: String, value: Boolean): FeatureFlagDto {
         val featureFlag = featureFlagRepository.findByKeyAndActiveIsTrue(key)
-            .orElseThrow { IllegalArgumentException("FeatureFlag not found or is not active with key $key") }
+            .orElseThrow { FeatureFlagNotFoundException("Feature flag with key $key is not found or is not active") }
             .apply {
                 this.value = value
             }
