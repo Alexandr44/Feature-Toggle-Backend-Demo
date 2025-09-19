@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2025-09-19-add-feature-flags-table" author="alexandr.glukhov">
+        <sql>
+            CREATE TABLE feature_flags
+            (
+                id          BIGSERIAL PRIMARY KEY,
+                key         VARCHAR(100) NOT NULL UNIQUE,
+                name        VARCHAR(255) NOT NULL,
+                tag         VARCHAR(255) NOT NULL,
+                description TEXT,
+                value       BOOLEAN      NOT NULL,
+                is_active   BOOLEAN      NOT NULL,
+                created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
