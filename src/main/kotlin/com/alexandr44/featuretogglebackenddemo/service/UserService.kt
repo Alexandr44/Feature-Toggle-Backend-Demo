@@ -2,6 +2,7 @@ package com.alexandr44.featuretogglebackenddemo.service
 
 import com.alexandr44.featuretogglebackenddemo.dto.UserDto
 import com.alexandr44.featuretogglebackenddemo.dto.UserEditDto
+import com.alexandr44.featuretogglebackenddemo.exception.UserNotFoundException
 import com.alexandr44.featuretogglebackenddemo.mapper.UserMapper
 import com.alexandr44.featuretogglebackenddemo.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -21,7 +22,7 @@ class UserService(
     @Transactional
     fun editUser(userId: UUID, userEditDto: UserEditDto): UserDto {
         val user = userRepository.findById(userId)
-            .orElseThrow { IllegalArgumentException("User with id $userId does not exist") }
+            .orElseThrow { UserNotFoundException("User with id $userId does not exist") }
         userMapper.update(user, userEditDto)
         userEditDto.password?.let {
             user.password = passwordEncoder.encode(it)
@@ -32,7 +33,7 @@ class UserService(
     @Transactional
     fun deleteUser(userId: UUID): UserDto {
         val user = userRepository.findById(userId)
-            .orElseThrow { IllegalArgumentException("User with id $userId does not exist") }
+            .orElseThrow { UserNotFoundException("User with id $userId does not exist") }
             .apply {
                 isActive = false
             }

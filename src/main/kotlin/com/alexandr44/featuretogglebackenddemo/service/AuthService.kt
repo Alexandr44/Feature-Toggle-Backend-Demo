@@ -13,6 +13,7 @@ import com.alexandr44.featuretogglebackenddemo.repository.UserRepository
 import com.alexandr44.featuretogglebackenddemo.security.AppUserDetailsService
 import com.alexandr44.featuretogglebackenddemo.security.JwtTokenService
 import jakarta.transaction.Transactional
+import mu.KotlinLogging
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.AuthenticationException
@@ -28,6 +29,8 @@ class AuthService(
     private val jwtService: JwtTokenService,
     private val authMapper: AuthMapper
 ) {
+
+    private val log = KotlinLogging.logger {}
 
     @Transactional
     fun registerUser(registrationRequest: RegistrationRequest): RegistrationResponse {
@@ -50,10 +53,12 @@ class AuthService(
                 UsernamePasswordAuthenticationToken(authorizationRequest.username, authorizationRequest.password)
             ).apply {
                 if (!this.isAuthenticated) {
-                    throw AuthorizationException("Authentication failed")
+                    log.error { "Authorization failed for user ${authorizationRequest.username}" }
+                    throw AuthorizationException("Authentication failed!")
                 }
             }
         } catch (e: AuthenticationException) {
+            log.error { "User ${authorizationRequest.username} could not make authentication" }
             throw AuthorizationException(e.message ?: "Couldn't make authentication")
         }
         val userDetails = appUserDetailsService.loadUserByUsername(authorizationRequest.username)
