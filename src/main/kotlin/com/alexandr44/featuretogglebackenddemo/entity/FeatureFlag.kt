@@ -44,6 +44,10 @@ class FeatureFlag(
 
 ) {
 
+    companion object {
+        const val AUDIT_TYPE = "FeatureFlag"
+    }
+
     constructor() : this(
         key = "",
         name = "",

@@ -52,15 +52,15 @@ class ExceptionHandlers {
         )
     }
 
-    @ExceptionHandler(FeatureFlagNotFoundException::class)
+    @ExceptionHandler(FeatureFlagOperationException::class)
     fun handleFeatureFlagNotFoundException(
-        exception: FeatureFlagNotFoundException,
+        exception: FeatureFlagOperationException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorDto> {
         return logAndBuildResponse(
             exception,
-            exception.message ?: "Feature flag not found",
-            HttpStatus.NOT_FOUND.value(),
+            exception.message ?: "Feature flag operation error",
+            exception.errorCode,
             request
         )
     }

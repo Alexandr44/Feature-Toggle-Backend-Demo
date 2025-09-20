@@ -2,7 +2,7 @@ package com.alexandr44.featuretogglebackenddemo.exception
 
 import java.io.Serial
 
-class FeatureFlagNotFoundException(message: String) : RuntimeException(message) {
+class FeatureFlagOperationException(message: String, val errorCode: Int) : RuntimeException(message) {
 
     companion object {
         @Serial
