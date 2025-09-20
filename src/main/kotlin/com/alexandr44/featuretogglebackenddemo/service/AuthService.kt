@@ -17,6 +17,8 @@ import mu.KotlinLogging
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.AuthenticationException
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -66,6 +68,24 @@ class AuthService(
             username = userDetails.username,
             token = jwtService.generateToken(userDetails)
         )
+    }
+
+    fun getCurrentUsername(): String {
+        val authentication = SecurityContextHolder.getContext().authentication
+
+        return when {
+            authentication == null -> {
+                log.warn { "Anonymous user in security context" }
+                "anonymous"
+            }
+
+            authentication.principal is UserDetails -> (authentication.principal as UserDetails).username
+            authentication.principal is String -> authentication.principal as String
+            else -> {
+                log.warn { "Unknown user in security context $authentication" }
+                "unknown"
+            }
+        }
     }
 
 }

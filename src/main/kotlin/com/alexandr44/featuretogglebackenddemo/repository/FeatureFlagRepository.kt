@@ -12,4 +12,6 @@ interface FeatureFlagRepository : JpaRepository<FeatureFlag, Long> {
 
     fun findByKeyAndActiveIsTrue(key: String): Optional<FeatureFlag>
 
+    fun findByKey(key: String): Optional<FeatureFlag>
+
 }
