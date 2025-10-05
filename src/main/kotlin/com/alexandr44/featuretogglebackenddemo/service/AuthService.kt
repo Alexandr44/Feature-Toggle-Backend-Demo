@@ -44,7 +44,7 @@ class AuthService(
             username = registrationRequest.username,
             password = passwordEncoder.encode(registrationRequest.password),
             role = registrationRequest.role ?: UserRole.USER,
-            isActive = true
+            active = true
         )
         return authMapper.map(userRepository.save(user))
     }

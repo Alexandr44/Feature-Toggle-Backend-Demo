@@ -35,7 +35,7 @@ class UserService(
         val user = userRepository.findById(userId)
             .orElseThrow { UserNotFoundException("User with id $userId does not exist") }
             .apply {
-                isActive = false
+                active = false
             }
         return userMapper.map(user)
     }

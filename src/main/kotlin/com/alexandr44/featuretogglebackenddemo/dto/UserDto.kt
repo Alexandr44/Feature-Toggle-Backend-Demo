@@ -8,7 +8,7 @@ data class UserDto(
     val id: UUID,
     val username: String,
     val role: UserRole,
-    val isActive: Boolean,
+    val active: Boolean,
     val createdAt: Instant,
     val updatedAt: Instant
 )

@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service
 class AppUserDetailsService(private val userRepository: UserRepository) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): UserDetails {
-        val user = userRepository.findByisActiveIsTrueAndUsername(username)
+        val user = userRepository.findByActiveIsTrueAndUsername(username)
             .orElseThrow { UsernameNotFoundException("User not found or nor active: $username") }
         val authorities = listOf(SimpleGrantedAuthority("ROLE_${user.role.name}"))
         return org.springframework.security.core.userdetails.User(
             user.username,
             user.password,
-            user.isActive,
+            user.active,
             true,
             true,
             true,

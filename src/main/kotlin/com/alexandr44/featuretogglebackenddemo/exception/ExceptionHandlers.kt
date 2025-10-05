@@ -71,7 +71,7 @@ class ExceptionHandlers {
         status: Int,
         request: HttpServletRequest
     ): ResponseEntity<ErrorDto> {
-        val path = "${request.method} ${request.requestURI} ${(request.queryString ?: "")}"
+        val path = "${request.method} ${request.requestURI} ${(request.queryString ?: "")}".trim()
         log.error("Got error while requesting $path, got message $message and status $status", exception)
         val errorDto = ErrorDto(
             message = message,
