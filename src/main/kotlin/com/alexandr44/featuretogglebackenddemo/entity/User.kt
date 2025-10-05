@@ -27,8 +27,8 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: UserRole,
 
-    @Column(nullable = false)
-    var isActive: Boolean,
+    @Column(nullable = false, name = "is_active")
+    var active: Boolean,
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -44,6 +44,6 @@ class User(
         username = "",
         password = "",
         role = UserRole.USER,
-        isActive = true
+        active = true
     )
 }

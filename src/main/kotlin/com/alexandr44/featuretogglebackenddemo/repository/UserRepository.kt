@@ -8,5 +8,5 @@ import java.util.*
 @Repository
 interface UserRepository : JpaRepository<User, UUID> {
     fun findByUsername(username: String): Optional<User>
-    fun findByisActiveIsTrueAndUsername(username: String): Optional<User>
+    fun findByActiveIsTrueAndUsername(username: String): Optional<User>
 }
