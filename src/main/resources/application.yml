@@ -17,5 +17,5 @@ spring:
     default-schema: feature_toggle
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: Zm9vYmFyMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=
   expiration-ms: 3600000

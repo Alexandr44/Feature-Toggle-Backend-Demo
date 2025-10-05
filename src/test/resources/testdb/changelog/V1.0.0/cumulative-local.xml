@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="/testdb/changelog/V1.0.0/2025-09-18-create-schema.xml"/>
+    <include file="/testdb/changelog/V1.0.0/2025-09-18-init-db.xml"/>
+    <include file="/testdb/changelog/V1.0.0/2025-09-19-add-admin-user.xml"/>
+    <include file="/testdb/changelog/V1.0.0/2025-09-19-add-feature-flags-table.xml"/>
+    <include file="/testdb/changelog/V1.0.0/2025-09-19-add-audit-logs-table.xml"/>
+</databaseChangeLog>
