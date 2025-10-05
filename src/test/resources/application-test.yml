@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: Feature-Toggle-Backend-Demo
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;NON_KEYWORDS=KEY,VALUE;
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+    hikari:
+      schema: PUBLIC
+    h2:
+      console:
+        enabled: true
+  liquibase:
+    user: sa
+    password: ""
+    enabled: true
+    change-log: classpath:testdb/changelog/db.changelog-master-local.xml
+    default-schema: PUBLIC
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.default_schema: feature_toggle
+
+logging:
+  level:
+    com.alexandr44: DEBUG
+    liquibase: INFO
