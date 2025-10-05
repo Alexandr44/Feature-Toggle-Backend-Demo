@@ -1,0 +1,3 @@
+INSERT INTO feature_toggle.users (id, username, password, role, is_active, created_at, updated_at) VALUES ('3945ebed-cf9e-496f-acff-47a90cd20bec', 'user1', '$2a$10$t.lPxGv.9pWt1JQGjqLMa.9EOdaZvma/pWP2.6L/TE7FD2QBgYDxW', 'USER', true, now(), now());
+INSERT INTO feature_toggle.users (id, username, password, role, is_active, created_at, updated_at) VALUES ('3ec33d09-6710-4c9e-b0f8-2e3c904de9ee', 'user2', '$2a$10$IfHSVMMIv1HqwpdyEsHZz.nmzf/NtCYJY0AvLenZBsPJxM7f.Bj2S', 'USER', true, now(), now());
+INSERT INTO feature_toggle.users (id, username, password, role, is_active, created_at, updated_at) VALUES ('3ec33d09-6710-4c9e-b0f8-2e3c904de9ff', 'admin2', '$2a$10$IfHSVMMIv1HqwpdyEsHZz.nmzf/NtCYJY0AvLenZBsPJxM7f.Bj2S', 'ADMIN', true, now(), now());
